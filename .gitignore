@@ -168,6 +168,11 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+data/
+data/accounts.txt
+data/proxies.txt
+data/wallets.txt
+
 
 # Spyder project settings
 .spyderproject

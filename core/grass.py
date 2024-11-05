@@ -31,7 +31,7 @@ class Grass(GrassWs, GrassRest, FailureCounter):
 
     def __init__(self, _id: int, email: str, password: str, proxy: str = None, db: AccountsDB = None):
         self.proxy = Proxy.from_str(proxy).as_url if proxy else None
-        super(GrassWs, self).__init__(email=email, password=password, user_agent=UserAgent().random, proxy=self.proxy)
+        super(GrassWs, self).__init__(email=email, password=password, user_agent=UserAgent(os='windows').random, proxy=self.proxy)
         self.proxy_score: Optional[int] = None
         self.id: int = _id
 
@@ -104,7 +104,7 @@ class Grass(GrassWs, GrassRest, FailureCounter):
 
                 for i in range(10 ** 9):
                     await self.send_ping()
-                    await self.send_pong()
+                    #await self.send_pong()
 
                     if SHOW_LOGS_RARELY:
                         if not (i % 10):
@@ -122,7 +122,7 @@ class Grass(GrassWs, GrassRest, FailureCounter):
                     if i:
                         self.fail_reset()
 
-                    await asyncio.sleep(random.randint(119, 120))
+                    await asyncio.sleep(random.randint(60, 61))
             except WebsocketClosedException as e:
                 logger.info(f"{self.id} | Websocket closed: {e}. Reconnecting...")
             except ConnectionResetError as e:

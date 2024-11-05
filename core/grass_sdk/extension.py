@@ -21,16 +21,7 @@ class GrassWs:
         uri = "wss://proxy2.wynd.network:4650/"
 
         headers = {
-            'Pragma': 'no-cache',
-            'Origin': 'chrome-extension://lkbnfiajjmbhnfledhphioinpickokdi',
-            'Accept-Language': 'en-US,en;q=0.9,uk;q=0.8,ru-RU;q=0.7,ru;q=0.6,en-GB;q=0.5,pl;q=0.4',
-            'Sec-WebSocket-Key': '9pviVQ2LanOjNPxF+2xA4Q==',
             'User-Agent': self.user_agent,
-            'Upgrade': 'websocket',
-            'Cache-Control': 'no-cache',
-            'Connection': 'Upgrade',
-            'Sec-WebSocket-Version': '13',
-            'Sec-WebSocket-Extensions': 'permessage-deflate; client_max_window_bits',
         }
 
         try:
@@ -69,9 +60,8 @@ class GrassWs:
                     "user_id": user_id,
                     "user_agent": self.user_agent,
                     "timestamp": int(time.time()),
-                    "device_type": "extension",
-                    "version": "4.26.2",
-                    "extension_id": "lkbnfiajjmbhnfledhphioinpickokdi"
+                    "device_type": "desktop",
+                    "version": "4.28.2",
                 }
             }
         )

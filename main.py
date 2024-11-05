@@ -172,7 +172,7 @@ async def main():
 
 
 if __name__ == "__main__":
-    bot_info("GRASS_AUTO")
+    bot_info("GRASS_AUTO_x2")
 
     if sys.platform == 'win32':
         asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
