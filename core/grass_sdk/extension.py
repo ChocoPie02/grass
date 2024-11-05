@@ -1,6 +1,6 @@
 import json
 import time
-
+import random
 from aiohttp import WSMsgType
 
 import uuid
@@ -18,14 +18,15 @@ class GrassWs:
         self.id = None
 
     async def connect(self):
-        uri = "wss://proxy2.wynd.network:4650/"
+        #uri = "wss://proxy2.wynd.network:4650/"
+        uri = ["wss://proxy2.wynd.network:4650/","wss://proxy2.wynd.network:4444/"]
 
         headers = {
             'User-Agent': self.user_agent,
         }
 
         try:
-            self.websocket = await self.session.ws_connect(uri, proxy_headers=headers, proxy=self.proxy)
+            self.websocket = await self.session.ws_connect(random.choice(uri), proxy_headers=headers, proxy=self.proxy)
         except Exception as e:
             if 'status' in dir(e) and e.status == 403:
                 raise ProxyForbiddenException(f"Low proxy score. Can't connect. Error: {e}")
@@ -72,8 +73,8 @@ class GrassWs:
         message = json.dumps(
             {"id": str(uuid.uuid4()), "version": "1.0.0", "action": "PING", "data": {}}
         )
-
-        await self.send_message(message)
+        await self.websocket.ping()
+        #await self.send_message(message)
 
     async def send_pong(self):
         connection_id = await self.get_connection_id()
