@@ -37,7 +37,7 @@ class Grass(GrassWs, GrassRest, FailureCounter):
 
         self.db: AccountsDB = db
 
-        self.session: aiohttp.ClientSession = aiohttp.ClientSession(trust_env=True,
+        self.session: aiohttp.ClientSession = aiohttp.ClientSession(trust_env=True,skip_auto_headers=['User-Agent'],
                                                                     connector=aiohttp.TCPConnector(ssl=False))
 
         self.proxies: List[str] = []
@@ -102,7 +102,7 @@ class Grass(GrassWs, GrassRest, FailureCounter):
                     if MIN_PROXY_SCORE:
                         await self.handle_proxy_score(MIN_PROXY_SCORE)
 
-                for i in range(10 ** 9):
+                for i in range(300):
                     await self.send_ping()
                     #await self.send_pong()
 
